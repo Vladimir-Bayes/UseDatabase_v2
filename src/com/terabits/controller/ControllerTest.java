@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.terabits.meta.bo.TimeSpanAndPhoneBo;
 import com.terabits.meta.bo.TimeSpanBo;
+import com.terabits.meta.bo.TimeTelMarkAndImeiBo;
+import com.terabits.meta.po.ConsumptionPo;
 import com.terabits.meta.po.MetaTest3Po;
 import com.terabits.meta.po.MetaTestPo;
 import com.terabits.service.ServiceTest;
@@ -125,6 +127,92 @@ public class ControllerTest {
 		}
 		return "77";
  	}
+	
+	@RequestMapping(value="/consumption")
+	public String consumption(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<ConsumptionPo> consumptionPos = new ArrayList<ConsumptionPo>();
+		consumptionPos = serviceTest.getAllConsumptions();
+		for (int i = 0; i < consumptionPos.size(); i++) {
+			System.out.println(consumptionPos.get(i).getUserId()+"  "+consumptionPos.get(i).getName()+"  "+consumptionPos.get(i).getTel()+"  "+consumptionPos.get(i).getCreateTime()+"  "+consumptionPos.get(i).getConsumption()+"  "+consumptionPos.get(i).getImei()+"  "+consumptionPos.get(i).getMark());
+		}
+		return "88";
+	}
+	
+	@RequestMapping(value="/consumptiontel")
+	public String consumptiontel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String tel = request.getParameter("tel");
+		List<ConsumptionPo> consumptionPos = new ArrayList<ConsumptionPo>();
+		consumptionPos = serviceTest.getAllConsumptionsByTel(tel);
+		for (int i = 0; i < consumptionPos.size(); i++) {
+			System.out.println(consumptionPos.get(i).getUserId()+"  "+consumptionPos.get(i).getName()+"  "+consumptionPos.get(i).getTel()+"  "+consumptionPos.get(i).getCreateTime()+"  "+consumptionPos.get(i).getConsumption()+"  "+consumptionPos.get(i).getImei()+"  "+consumptionPos.get(i).getMark());
+		}
+		return "99";
+	}
+	
+	@RequestMapping(value="/consumptionmark")
+	public String consumptionmark(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String mark = request.getParameter("mark");
+		List<ConsumptionPo> consumptionPos = new ArrayList<ConsumptionPo>();
+		consumptionPos = serviceTest.getAllConsumptionsByMark(mark);
+		for (int i = 0; i < consumptionPos.size(); i++) {
+			System.out.println(consumptionPos.get(i).getUserId()+"  "+consumptionPos.get(i).getName()+"  "+consumptionPos.get(i).getTel()+"  "+consumptionPos.get(i).getCreateTime()+"  "+consumptionPos.get(i).getConsumption()+"  "+consumptionPos.get(i).getImei()+"  "+consumptionPos.get(i).getMark());
+		}
+		return "100";
+	}
+	
+	@RequestMapping(value="/consumptionimei")
+	public String consumptionimei(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String imei = request.getParameter("imei");
+		List<ConsumptionPo> consumptionPos = new ArrayList<ConsumptionPo>();
+		consumptionPos = serviceTest.getAllConsumptionsByImei(imei);
+		for (int i = 0; i < consumptionPos.size(); i++) {
+			System.out.println(consumptionPos.get(i).getUserId()+"  "+consumptionPos.get(i).getName()+"  "+consumptionPos.get(i).getTel()+"  "+consumptionPos.get(i).getCreateTime()+"  "+consumptionPos.get(i).getConsumption()+"  "+consumptionPos.get(i).getImei()+"  "+consumptionPos.get(i).getMark());
+		}
+		return "101";
+ 	}
+	
+	@RequestMapping(value="/consumptiontime")
+	public String consumptiontime(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String beginTime = request.getParameter("beginTime");
+		String endTime = request.getParameter("endTime");
+		TimeSpanBo timeSpanBo = new TimeSpanBo(beginTime,endTime);
+		List<ConsumptionPo> consumptionPos = new ArrayList<ConsumptionPo>();
+		consumptionPos = serviceTest.getAllConsumptionsByTime(timeSpanBo);
+		for (int i = 0; i < consumptionPos.size(); i++) {
+			System.out.println(consumptionPos.get(i).getUserId()+"  "+consumptionPos.get(i).getName()+"  "+consumptionPos.get(i).getTel()+"  "+consumptionPos.get(i).getCreateTime()+"  "+consumptionPos.get(i).getConsumption()+"  "+consumptionPos.get(i).getImei()+"  "+consumptionPos.get(i).getMark());
+		}
+		return "102";
+	}
+	
+	@RequestMapping(value="/consumptiontimetel")
+	public String consumptiontimetel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String beginTime = request.getParameter("beginTime");
+		String endTime = request.getParameter("endTime");
+		String tel = request.getParameter("tel");
+		TimeSpanAndPhoneBo timeSpanAndPhoneBo = new TimeSpanAndPhoneBo(beginTime,endTime,tel);
+		List<ConsumptionPo> consumptionPos = new ArrayList<ConsumptionPo>();
+		consumptionPos = serviceTest.getAllConsumptionsByTimeAndTel(timeSpanAndPhoneBo);
+		for (int i = 0; i < consumptionPos.size(); i++) {
+			System.out.println(consumptionPos.get(i).getUserId()+"  "+consumptionPos.get(i).getName()+"  "+consumptionPos.get(i).getTel()+"  "+consumptionPos.get(i).getCreateTime()+"  "+consumptionPos.get(i).getConsumption()+"  "+consumptionPos.get(i).getImei()+"  "+consumptionPos.get(i).getMark());
+		}
+		return "103";
+	}
+	
+	@RequestMapping(value="/consumptiontimetelmarkimei")
+	public String consumptiontimetelmarkimei(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String beginTime = request.getParameter("beginTime");
+		String endTime = request.getParameter("endTime");
+		String tel = request.getParameter("tel");
+		String mark = request.getParameter("mark");
+		String imei = request.getParameter("imei");
+		TimeTelMarkAndImeiBo timeTelMarkAndImeiBo = new TimeTelMarkAndImeiBo(beginTime, endTime, tel, mark, imei);
+		List<ConsumptionPo> consumptionPos = new ArrayList<ConsumptionPo>();
+		consumptionPos = serviceTest.getAllConsumptionsByTimeTelMarkAndImei(timeTelMarkAndImeiBo);
+		for (int i = 0; i < consumptionPos.size(); i++) {
+			System.out.println(consumptionPos.get(i).getUserId()+"  "+consumptionPos.get(i).getName()+"  "+consumptionPos.get(i).getTel()+"  "+consumptionPos.get(i).getCreateTime()+"  "+consumptionPos.get(i).getConsumption()+"  "+consumptionPos.get(i).getImei()+"  "+consumptionPos.get(i).getMark());
+		}
+		return "104";
+	}
 
 
 }
