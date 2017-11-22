@@ -25,6 +25,7 @@
     <mappers>
         <mapper resource="MapperTest.xml" />
         <mapper resource="MapperTest3.xml" />
+        <mapper resource="ConsumptionMapper.xml"/>
     </mappers>
     
 

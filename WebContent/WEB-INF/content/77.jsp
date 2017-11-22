@@ -1,1 +1,1 @@
-Just now!
+Just now
