@@ -9,6 +9,7 @@ import com.terabits.dao.DaoTest;
 import com.terabits.mapper.ConsumptionMapper;
 import com.terabits.mapper.MapperTest;
 import com.terabits.mapper.MapperTest3;
+import com.terabits.meta.bo.TelAndBalanceBo;
 import com.terabits.meta.bo.TimeSpanAndPhoneBo;
 import com.terabits.meta.bo.TimeSpanBo;
 import com.terabits.meta.bo.TimeTelMarkAndImeiBo;
@@ -48,6 +49,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -64,6 +66,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -80,6 +83,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -96,6 +100,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -112,6 +117,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -128,6 +134,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -144,6 +151,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -160,6 +168,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -176,6 +185,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -192,6 +202,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -208,6 +219,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -224,6 +236,7 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
@@ -240,9 +253,44 @@ public class DaoTestImpl implements DaoTest  {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			session.close();
 		}
 		return consumptionPos;
+	}
+	
+	public int insertPayment(MetaTest3Po metaTest3Po) throws Exception {
+		SqlSession session = DBTools.getSession();
+		MapperTest3 mapper = session.getMapper(MapperTest3.class);
+		try {
+			mapper.insertPayment(metaTest3Po);
+			session.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			session.rollback();
+			return 400;
+		} finally {
+			session.close();
+		}
+		return 200;
+	}
+	
+	public int undateBalance(TelAndBalanceBo telAndBalanceBo) throws Exception {
+		SqlSession session = DBTools.getSession();
+		MapperTest3 mapper = session.getMapper(MapperTest3.class);
+		try {
+			mapper.undateBalance(telAndBalanceBo);
+			session.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			session.rollback();
+			return 400;
+		} finally {
+			session.close();
+		}
+		return 200;
 	}
 }

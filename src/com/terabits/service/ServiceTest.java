@@ -2,6 +2,7 @@ package com.terabits.service;
 
 import java.util.List;
 
+import com.terabits.meta.bo.TelAndBalanceBo;
 import com.terabits.meta.bo.TimeSpanAndPhoneBo;
 import com.terabits.meta.bo.TimeSpanBo;
 import com.terabits.meta.bo.TimeTelMarkAndImeiBo;
@@ -85,5 +86,19 @@ public interface ServiceTest {
 	 * @return
 	 */
 	public List<ConsumptionPo> getAllConsumptionsByTimeTelMarkAndImei(TimeTelMarkAndImeiBo telMarkAndImeiBo);
+	
+	/**
+	 * @param metaTest3Po
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertPayment(MetaTest3Po metaTest3Po) throws Exception;
+	
+	/**
+	 * @param telAndBalanceBo
+	 * @return
+	 * @throws Exception
+	 */
+	public int undateBalance(TelAndBalanceBo telAndBalanceBo) throws Exception;
 	
 }
