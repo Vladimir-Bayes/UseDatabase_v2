@@ -37,5 +37,13 @@
 <select id="selectAllItemsByTimeAndPhone3" parameterType="com.terabits.meta.bo.TimeSpanAndPhoneBo" resultMap="maptest3">
 	select * from test3 where CreateTime >= #{beginTime} and CreateTime &lt; #{endTime} and Tel = #{phone} order by CreateTime desc
 </select>
+	
+<insert id="insertPayment" useGeneratedKeys="true" parameterType="com.terabits.meta.po.MetaTest3Po">
+	insert into test3 (Name, Tel, CreateTime, Payment) values (#{name}, #{tel}, now(), #{payment}) 
+</insert>
+
+<insert id="undateBalance" parameterType="com.terabits.meta.bo.TelAndBalanceBo">
+	update test5 set Balance = #{balance}+(select Balance where Tel = #{tel}) where Tel = #{tel}; 
+</insert>
 
 </mapper>

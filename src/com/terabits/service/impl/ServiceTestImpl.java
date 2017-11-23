@@ -3,6 +3,7 @@ package com.terabits.service.impl;
 import java.util.List;
 
 import com.terabits.dao.DaoTest;
+import com.terabits.meta.bo.TelAndBalanceBo;
 import com.terabits.meta.bo.TimeSpanAndPhoneBo;
 import com.terabits.meta.bo.TimeSpanBo;
 import com.terabits.meta.bo.TimeTelMarkAndImeiBo;
@@ -162,6 +163,28 @@ public class ServiceTestImpl implements ServiceTest {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public int insertPayment(MetaTest3Po metaTest3Po) throws Exception {
+		try {
+			daoTest.insertPayment(metaTest3Po);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return 400;
+		}
+		return 200;		
+	}
+	
+	public int undateBalance(TelAndBalanceBo telAndBalanceBo) throws Exception {
+		try {
+			daoTest.undateBalance(telAndBalanceBo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return 400;
+		}
+		return 200;
 	}
 
 }

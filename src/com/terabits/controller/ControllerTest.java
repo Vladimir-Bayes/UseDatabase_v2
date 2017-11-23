@@ -3,6 +3,7 @@ package com.terabits.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.terabits.meta.bo.TelAndBalanceBo;
 import com.terabits.meta.bo.TimeSpanAndPhoneBo;
 import com.terabits.meta.bo.TimeSpanBo;
 import com.terabits.meta.bo.TimeTelMarkAndImeiBo;
@@ -213,6 +214,25 @@ public class ControllerTest {
 		}
 		return "104";
 	}
+	
+	@RequestMapping(value="/insertpayment")
+	public String insertpayment(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String name = request.getParameter("name");
+		String tel = request.getParameter("tel");
+		String paymentyString = request.getParameter("payment");
+		Double payment = Double.valueOf(paymentyString).doubleValue();
+		MetaTest3Po metaTest3Po = new MetaTest3Po();
+		metaTest3Po.setName(name);
+		metaTest3Po.setPayment(payment);
+		metaTest3Po.setTel(tel);
+		TelAndBalanceBo telAndBalanceBo = new TelAndBalanceBo();
+		telAndBalanceBo.setBalance(payment);
+		telAndBalanceBo.setTel(tel);
+		serviceTest.insertPayment(metaTest3Po);
+		serviceTest.undateBalance(telAndBalanceBo);
+		return "105";
+	}
+	
 
 
 }
